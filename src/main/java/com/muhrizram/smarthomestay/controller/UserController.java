@@ -1,5 +1,8 @@
 package com.muhrizram.smarthomestay.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.muhrizram.smarthomestay.model.User;
+import com.muhrizram.smarthomestay.service.UserService;
 
 // @Controller
 @RestController // @Controller + @ResponseBody
 public class UserController {
+
+    @Autowired
+    private UserService uService;
 
     @Value("${app.name}")
     private String appName;
@@ -28,8 +35,8 @@ public class UserController {
 
     // @RequestMapping(value = "/users", method = RequestMethod.GET)
     @GetMapping("/users")
-    public String getUsers() {
-        return "Displaying the list of Users";
+    public List<User> getUsers() {
+        return uService.getUser();
     }
 
     @GetMapping("/users/{id}")
