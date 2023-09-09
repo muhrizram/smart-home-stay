@@ -28,8 +28,8 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public String getUser(@PathVariable Long id) {
-        return "Fetching the user details for the id " + id;
+    public User getUser(@PathVariable Long id) {
+        return uService.getUserDetail(id);
     }
 
     @PostMapping("/users")
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users")
-    public String deleteUser(@RequestParam Long id) {
-        return "Deleting the user details for the id " + id;
+    public void deleteUser(@RequestParam Long id) {
+        uService.deleteUser(id);
     }
 }
