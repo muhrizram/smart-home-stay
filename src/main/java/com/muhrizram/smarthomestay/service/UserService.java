@@ -5,4 +5,6 @@ import com.muhrizram.smarthomestay.model.User;
 
 public interface UserService {
     List<User> getUser();
+
+    User saveUser(User user);
 }

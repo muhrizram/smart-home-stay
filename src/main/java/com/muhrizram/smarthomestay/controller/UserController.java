@@ -33,8 +33,8 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public String saveUser(@RequestBody User user) {
-        return "Saving the user details to the database " + user;
+    public User saveUser(@RequestBody User user) {
+        return uService.saveUser(user);
     }
 
     @PutMapping("/users/{id}")
