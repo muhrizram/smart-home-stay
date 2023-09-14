@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.muhrizram.smarthomestay.model.User;
 import com.muhrizram.smarthomestay.service.UserService;
 
+import jakarta.validation.Valid;
+
 // @Controller
 @RestController // @Controller + @ResponseBody
 public class UserController {
@@ -33,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User saveUser(@RequestBody User user) {
+    public User saveUser(@Valid @RequestBody User user) {
         return uService.saveUser(user);
     }
 
