@@ -3,6 +3,8 @@ package com.muhrizram.smarthomestay.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,28 +27,28 @@ public class UserController {
 
     // @RequestMapping(value = "/users", method = RequestMethod.GET)
     @GetMapping("/users")
-    public List<User> getUsers() {
-        return uService.getUser();
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<List<User>>(uService.getUser(), HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
-    public User getUser(@PathVariable Long id) {
-        return uService.getUserDetail(id);
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        return new ResponseEntity<User>(uService.getUserDetail(id), HttpStatus.OK);
     }
 
     @PostMapping("/users")
-    public User saveUser(@Valid @RequestBody User user) {
-        return uService.saveUser(user);
+    public ResponseEntity<User> saveUser(@Valid @RequestBody User user) {
+        return new ResponseEntity<User>(uService.saveUser(user), HttpStatus.CREATED) ;
     }
 
     @PutMapping("/users/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         user.setId(id);
-        return uService.updateUser(user);
+        return new ResponseEntity<User>(uService.updateUser(user), HttpStatus.OK);
     }
 
     @DeleteMapping("/users")
-    public void deleteUser(@RequestParam Long id) {
-        uService.deleteUser(id);
+    public ResponseEntity<HttpStatus> deleteUser(@RequestParam Long id) {
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 }
